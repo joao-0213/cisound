@@ -5,7 +5,6 @@ import '../services/lastfm_service.dart';
 class SearchViewModel extends ChangeNotifier {
   final LastFmService _service = LastFmService();
 
-  // Estados que a View vai observar
   bool isLoading = false;
   List<Album> albums = [];
   String? errorMessage;

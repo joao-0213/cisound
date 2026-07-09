@@ -8,7 +8,6 @@ class FavoritesViewModel extends ChangeNotifier {
   List<Album> albums = [];
   String? errorMessage;
 
-  // Carrega a lista completa de favoritos do usuário atual
   void loadFavorites() {
     try {
       albums = _storage.getFavorites();
@@ -20,7 +19,6 @@ class FavoritesViewModel extends ChangeNotifier {
     }
   }
 
-  // Adiciona ou remove o álbum do banco e atualiza a lista em memória
   Future<void> toggleFavorite(Album album) async {
     try {
       if (isFavorite(album)) {
@@ -28,7 +26,6 @@ class FavoritesViewModel extends ChangeNotifier {
       } else {
         await _storage.saveFavorite(album);
       }
-      // Recarrega a lista para refletir a mudança imediatamente na UI
       loadFavorites();
     } catch (e) {
       errorMessage = 'Erro ao atualizar o favorito.';
@@ -36,7 +33,6 @@ class FavoritesViewModel extends ChangeNotifier {
     }
   }
 
-  // Verifica se o álbum existe na lista em memória
   bool isFavorite(Album album) {
     return albums.any((a) => a.mbid == album.mbid);
   }

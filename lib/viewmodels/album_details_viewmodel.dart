@@ -5,39 +5,35 @@ import '../services/lastfm_service.dart';
 class AlbumDetailsViewModel extends ChangeNotifier {
   final LastFmService _service = LastFmService();
 
-  // Estados que a View vai observar
   bool isLoading = false;
-  AlbumDetails? albumDetails; // Pode ser nulo no início, antes da API responder
+  AlbumDetails? albumDetails;
   String? errorMessage;
 
-  // Método que será chamado quando a tela de detalhes abrir
-  Future<void> loadAlbumDetails(String mbid) async {
-    // Validação de segurança inicial
-    if (mbid.isEmpty) {
-      errorMessage = 'ID do álbum não encontrado.';
+  Future<void> loadAlbumDetails({String? mbid, String? artist, String? albumName}) async {
+    if ((mbid == null || mbid.isEmpty) && (artist == null || albumName == null)) {
+      errorMessage = 'ID ou informações do álbum não encontradas.';
       notifyListeners();
       return;
     }
 
-    // 1. Prepara o estado para o carregamento
     isLoading = true;
     errorMessage = null;
-    notifyListeners(); // Avisa a View para mostrar o CircularProgressIndicator
+    notifyListeners();
 
     try {
-      // 2. Tenta buscar os dados na API
-      albumDetails = await _service.getAlbumDetails(mbid);
+      albumDetails = await _service.getAlbumDetails(
+        mbid: mbid,
+        artist: artist,
+        album: albumName,
+      );
     } catch (e) {
-      // 3. Captura o erro (ex: sem internet ou falha na API)
       errorMessage = 'Não foi possível carregar as músicas deste álbum.';
     } finally {
-      // 4. Independente de dar certo ou errado, o carregamento terminou
       isLoading = false;
-      notifyListeners(); // Avisa a View para desenhar a tela final (dados ou erro)
+      notifyListeners();
     }
   }
 
-  // Método auxiliar opcional para limpar o estado ao sair da tela
   void clear() {
     albumDetails = null;
     errorMessage = null;

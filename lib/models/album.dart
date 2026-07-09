@@ -2,9 +2,9 @@ import 'package:hive/hive.dart';
 
 part 'album.g.dart';
 
-@HiveType(typeId: 0) // Diz ao Hive que este é o tipo de objeto número 0
+@HiveType(typeId: 0)
 class Album {
-  @HiveField(0) // Mapeia os campos para o banco de dados
+  @HiveField(0)
   final String mbid;
 
   @HiveField(1)
@@ -25,13 +25,13 @@ class Album {
 
   factory Album.fromJson(Map<String, dynamic> json) {
     String image = '';
-    // A API do Last.fm manda um array de imagens. Pegamos a posição 2 (tamanho large)
+
     if (json['image'] != null && json['image'].isNotEmpty) {
       image = json['image'][2]['#text'] ?? '';
     }
 
     return Album(
-      mbid: json['mbid'] ?? DateTime.now().toString(), // Se não tiver ID, gera um genérico
+      mbid: json['mbid'] ?? DateTime.now().toString(),
       name: json['name'] ?? 'Desconhecido',
       artist: json['artist'] ?? 'Desconhecido',
       imageUrl: image,
