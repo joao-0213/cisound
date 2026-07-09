@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-// Importe seus viewmodels aqui depois de criá-los!
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import 'models/album.dart';
 
 void main() async {
+  await dotenv.load(fileName: ".env");
   // 1. Avisa o Flutter que precisamos rodar código nativo antes de desenhar a tela
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -13,7 +16,8 @@ void main() async {
   // 3. Abre a caixa principal que vai guardar o nome de quem logou
   await Hive.openBox('sessionBox');
 
-  // 4. (Faremos depois) Registrar os adaptadores do Hive
+  // 4. Registrar os adaptadores do Hive
+  Hive.registerAdapter(AlbumAdapter());
 
   // 5. Inicia o app envelopado no MultiProvider
   runApp(
