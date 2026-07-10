@@ -61,7 +61,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
               const Text(
-                'Seus álbums, em qualquer lugar.',
+                'Seus álbuns, em qualquer lugar.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,
