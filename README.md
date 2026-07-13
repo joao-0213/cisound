@@ -11,6 +11,8 @@
 
 ## 📱 Telas do Aplicativo
 
+<img width="1040" height="610" alt="image" src="https://github.com/user-attachments/assets/89919da5-6f5a-4562-a3d1-46e252b7201c" />
+
 1. **Mock Login:** Tela inicial de credenciamento simples. O nome de usuário é persistido para garantir que cada pessoa tenha sua própria "estante" de favoritos no dispositivo.
 2. **Pesquisa (Explorar):** Interface reativa para busca de álbuns na API do Last.fm, exibindo resultados com *lazy loading* para garantir alta performance.
 3. **Detalhes do Álbum:** Exibe a capa em destaque, metadados, tags de gênero e a lista de faixas musicais (tracklist). Inclui a ação de favoritar.
